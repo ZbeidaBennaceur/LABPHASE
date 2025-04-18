@@ -1,0 +1,28 @@
+//01 IMPORT (REQUIRE)
+const express=require("express")
+require("dotenv").config()
+
+
+const connectDB = require ('./config/connectDB')
+
+//02 INSTANCE OF EXPRESS
+const app=express()
+
+//MIDDLEWARE
+app.use(express.json())
+
+//05 CONNEC DB
+connectDB()
+
+//06 ROUTES
+app.use("/api/auth", require('./routes/auth.route'))
+
+//03 PORT
+const PORT= process.env.PORT || 7500;
+
+//LISTEN TO PORT
+app.listen(PORT,(err)=>{
+    err
+    ?
+    console.log(err):console.log(`The server is on the port: http://localhost:${PORT}`);
+});
