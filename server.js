@@ -1,3 +1,4 @@
+
 //01 IMPORT (REQUIRE)
 const express=require("express")
 require("dotenv").config()
@@ -24,5 +25,7 @@ const PORT= process.env.PORT || 7500;
 app.listen(PORT,(err)=>{
     err
     ?
-    console.log(err):console.log(`The server is on the port: http://localhost:${PORT}`);
+    console.error(err):console.log(`The server is on the port: http://localhost:${PORT}`);
 });
+
+//COURS 03 NEXT

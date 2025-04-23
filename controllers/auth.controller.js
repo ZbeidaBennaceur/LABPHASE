@@ -32,6 +32,7 @@ exports.login=async(req,res)=>{
     try {
         const {email,password}=req.body;
         const foundUser=await User.findOne({email})
+       
         if(!foundUser){
             return res.status(400).json({errors:[{msg:"Email ou mot de passe incorrect"}]})
         }
@@ -39,7 +40,12 @@ exports.login=async(req,res)=>{
         if (!checkPassword){
             return res.status(400).json({errors:[{msg:"Email ou mot de passe incorrect"}]})
         }
-        res.status(200).json({success:[{msg:"Login fait avec succès"}],user:foundUser})
+        const token = jwt.sign(
+            { id: foundUser._id },
+            process.env.SECRET_KEY,
+            { expiresIn: "2h" }
+          );
+        res.status(200).json({success:[{msg:"Login fait avec succès"}],user:foundUser,token})
     } catch (error) {
         res.status(400).json({errors:[{msg:"Le login a échoué"}],error})
     }

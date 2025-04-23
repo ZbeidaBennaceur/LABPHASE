@@ -1,0 +1,16 @@
+.navbarre{
+    position: sticky;
+}
+
+
+.ButtonNav{
+    margin-left:2rem;
+}
+
+.ButtonNav:hover{
+    color: rgb(136,221,216) !important;
+}
+
+.ButtonNavDrop:hover{
+    background-color: rgb(136,221,216,0.2) !important ;
+}
