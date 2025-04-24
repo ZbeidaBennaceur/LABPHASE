@@ -43,14 +43,17 @@ export const current=()=>async(dispatch)=>{
         };
         const result=await axios.get("/api/auth/current",config);
         dispatch({type:CURRENT_AUTH,payload:result.data});
+       // console.log("payload current() :", result.data);
         
     } catch (error) {
         dispatch({type:FAIL_AUTH,payload:error.response.data.errors})
     }
+    
 };
 
 //action logout
 export const logout=()=>(dispatch)=>{
+    localStorage.removeItem("token");
     dispatch({type:LOGOUT_AUTH})
 }
 

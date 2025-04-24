@@ -16,7 +16,10 @@ app.use(express.json())
 connectDB()
 
 //06 ROUTES
-app.use("/api/auth", require('./routes/auth.route'))
+app.use("/api/auth", require('./routes/auth.route'));
+
+//ROUTE MANIPULATION USERS PAR ADMIN
+app.use("/api/user",require("./routes/user.route"))
 
 //03 PORT
 const PORT= process.env.PORT || 7500;

@@ -1,8 +1,16 @@
 import React from 'react'
 import {Navbar, Nav, Container,NavDropdown} from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../JS/actions/authAction';
 import '../styles/navBarr.css';
 
 const NavBarre = () => {
+  const dispatch=useDispatch()
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const isAdmin=useSelector(state=>state.auth.user.isAdmin)
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div className="navbarrecontainer">
        <Navbar expand="md" className="bg-body-tertiary sticky-top navbarre">
@@ -12,22 +20,29 @@ const NavBarre = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto nav-center">
             <Nav.Link className='ButtonNav' href="/">Accueil</Nav.Link>
-            <Nav.Link className='ButtonNav' href="/login">S'identifier</Nav.Link>
-            <Nav.Link className='ButtonNav' href="/register">Créer un compte</Nav.Link>
-            
-            <NavDropdown  className='ButtonNav' title="Mon profil" id="basic-nav-dropdown">
-              <NavDropdown.Item  className='ButtonNavDrop' href="/mesdevis">Mes devis</NavDropdown.Item>
-              <NavDropdown.Item className='ButtonNavDrop' href="/profile">Gérer mon compte</NavDropdown.Item>
-              <NavDropdown.Divider />
+            {!isAuth && (
+                <>
+                  <Nav.Link className='ButtonNav' href="/login">S'identifier</Nav.Link>
+                  <Nav.Link className='ButtonNav' href="/register">Créer un compte</Nav.Link>
+                </>
+              )}
 
-              <NavDropdown.Item  className='ButtonNavDrop'href="#">
-                Déconnexion
-              </NavDropdown.Item> 
-            </NavDropdown>
+              {isAuth && (
+                <NavDropdown className='ButtonNav' title="Mon profil" id="basic-nav-dropdown">
+                  <NavDropdown.Item className='ButtonNavDrop' href="/mesdevis">Mes devis</NavDropdown.Item>
+                  <NavDropdown.Item className='ButtonNavDrop' href="/profile">Gérer mon compte</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item className='ButtonNavDrop'onClick={handleLogout}>
+                    Déconnexion
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             <Nav.Link className='ButtonNav' href="/simulateur">Simulateur</Nav.Link>
             <Nav.Link  className='ButtonNav' href="/chat">Discutez avec nous</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        {isAdmin &&( <Nav.Link className='ButtonNav' href="/dashboard">Tableau de bord</Nav.Link>)}
+       
       </Container>
     </Navbar>
     </div>

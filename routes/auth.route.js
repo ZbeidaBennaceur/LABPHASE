@@ -18,9 +18,6 @@ router.post('/login',loginValidation(),validation,login)
 
 //CURRENT USER
 router.get('/current', isAuth, (req, res) => {
-  if (!req.user) {
-    return res.status(404).json({ msg: "Utilisateur non trouvé" });
-  }
   res.status(200).json(req.user);
 });
   

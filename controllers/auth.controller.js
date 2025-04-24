@@ -6,6 +6,7 @@ const jwt=require('jsonwebtoken')
 exports.register=async(req,res)=>{
     try {
         const {name,email,password,city,phone}=req.body;
+       // console.log(req.body)
         const foundUser=await User.findOne({email});
         if (foundUser) {
             return res.status(400)

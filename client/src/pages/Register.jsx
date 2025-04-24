@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState} from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {Form,Button} from 'react-bootstrap'
 import '../styles/forms.css';
 import { register } from '../JS/actions/authAction';
+
 
 const Register = () => {
   
@@ -11,23 +12,19 @@ const Register = () => {
     name:"",email:"", password:"", city:"", phone:"",
   });
 
+  const navigate = useNavigate();
   const dispatch=useDispatch()
   const handleChange=(e)=>{
     setNewUser({...newUser,[e.target.name]:e.target.value})
   };
   const handleRegister=(e)=>{
     e.preventDefault()
-    dispatch(register(newUser));
+    dispatch(register(newUser,navigate));
   };
-  const auth = useSelector(state => state.auth);
-const navigate = useNavigate();
-useEffect(() => {
-  if (auth.isAuth) {
-    navigate('/profile');
-  }
-}, [auth.isAuth, navigate]);
-//console.log(newUser)
-  return (
+
+
+
+return (
     <div>
        <div className='overlaylogin' style={{marginTop:"10rem",marginBottom:"8rem"}}>
        <Form className='Formulaire' onSubmit={handleRegister}>
@@ -53,7 +50,7 @@ useEffect(() => {
       
       <Form.Group className="mb-3">
         <Form.Label>Adresse</Form.Label>
-        <Form.Control type="text" placeholder="Entrez votre nom"  className="forminput"  name="city" // ← important
+        <Form.Control type="text" placeholder="Entrez votre adresse"  className="forminput"  name="city" // ← important
     value={newUser.city}
     onChange={handleChange}/>
       </Form.Group>

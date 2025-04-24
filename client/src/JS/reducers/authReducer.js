@@ -35,7 +35,6 @@ const authReducer=(state=initialState,{type,payload})=>{
             isLoad:false,
             errors:payload}
         case CURRENT_AUTH:
-            localStorage.setItem("token",payload.token)
             return{
             ...state,
             isLoad:false,

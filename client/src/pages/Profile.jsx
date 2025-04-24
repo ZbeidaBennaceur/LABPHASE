@@ -10,7 +10,7 @@ const Profile = () => {
       {user && user.name ? (
         <h3>Bienvenue {user.name}</h3>
       ) : (
-        <h1>Bienvenue, utilisateur non identifié</h1>
+        <h1>Bienvenue</h1>
       )}
     </div>
   ); }
