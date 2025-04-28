@@ -1,6 +1,6 @@
 //imports
 import axios from 'axios'
-import { CURRENT_AUTH, LOAD_AUTH, LOGOUT_AUTH,SUCCESS_AUTH,FAIL_AUTH } from "../actionTypes/authActionTypes"
+import { CURRENT_AUTH, LOAD_AUTH, LOGOUT_AUTH,SUCCESS_AUTH,FAIL_AUTH, CLEAR_ERRORS_AUTH, CLEAR_SUCCESS_AUTH } from "../actionTypes/authActionTypes"
 
 
 //action register
@@ -18,16 +18,18 @@ export const register=(newUser,navigate)=>async(dispatch)=>{
 
 //action login
 export const login=(user,navigate)=>async(dispatch)=>{
+
     dispatch({type:LOAD_AUTH});
    
     try {
         const result=await axios.post('/api/auth/login',user)
         dispatch({ type: SUCCESS_AUTH, payload: result.data })
         navigate("/profile")
-       console.log(result.data);
+      // console.log(result.data);
 
     } catch (error) {
         dispatch({type:FAIL_AUTH,payload:error.response.data.errors})
+       
     }
 }
 
@@ -57,3 +59,15 @@ export const logout=()=>(dispatch)=>{
     dispatch({type:LOGOUT_AUTH})
 }
 
+
+export const clearError=()=>{
+    return {
+        type:CLEAR_ERRORS_AUTH
+    }
+}
+
+export const clearSuccess=()=>{
+    return {
+        type:CLEAR_SUCCESS_AUTH
+    }
+}

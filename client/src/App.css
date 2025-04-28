@@ -13,10 +13,11 @@ body{
     margin-top: 5%;         
   }
 
-  button{
+  
+.buttonprincipal{
     background-color: rgb(136,221,216) !important; 
-    height:3rem !important;
-    width:10rem !important;
+    height:2.5em !important;
+    width:8em !important;
     border:none !important;
     font-family: "Lato", sans-serif !important;
     font-weight: 400 !important;
@@ -26,10 +27,10 @@ body{
     border-radius: 8px !important;
   }
 
-  button:hover{
+.buttonprincipal:hover{
     background-color: rgb(255, 247, 0) !important;
-    height:3rem !important;
-    width:10rem !important; 
+    height:2.5em !important;
+    width:8em !important; 
     border:none !important;
     font-family: "Lato", sans-serif !important;
     font-weight: 400 !important;
@@ -39,10 +40,10 @@ body{
     border-radius: 8px !important;
   }
 
-  button:active{
+  .buttonprincipal:active{
     background-color: rgb(136,221,216) !important;
-    height:3rem !important;
-    width:10rem !important;
+    height:2.5em!important;
+    width:8em !important;
     border:none !important;
     font-family: "Lato", sans-serif !important;
     font-weight: 400 !important;
@@ -72,3 +73,92 @@ body{
     box-shadow: 0 0 0 2px rgba(136,221,216, 0.5) !important;
     border-color: rgb(136,221,216) !important;
   }
+
+  .buttonsecondary{
+    background-color: rgb(136,221,216) !important; 
+    height:2.5em !important;
+    width:6.5em !important;
+    border:none !important;
+    font-family: "Lato", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color:white !important;
+    font-size:medium !important;
+    border-radius: 8px !important;
+  }
+  .buttonsecondary:hover{
+    background-color:rgb(136,221,216) !important;
+    height:2.5em !important;
+    width:6.5em !important;
+    border:none !important;
+    font-family: "Lato", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: rgb(61, 61, 61) !important;
+    font-size:medium !important;
+    border-radius: 8px !important;
+  }
+
+  .buttonsecondary:active{
+    background-color: rgb(136,221,216) !important;
+    height:2.5em !important;
+    width:6.5em !important;
+    border:none !important;
+    font-family: "Lato", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color:white !important;
+    font-size:medium !important;
+    border-radius: 8px !important;
+  }
+
+  .buttonsecondarydel{
+    background-color:rgb(228, 95, 43)!important; 
+    height:2.5em !important;
+    width:6.5em !important;
+    border:none !important;
+    font-family: "Lato", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: white !important;
+    font-size:medium !important;
+    border-radius: 8px !important;
+    margin-left: 2%;
+  }
+
+  .buttonsecondarydel:active,  .buttonsecondarydel:hover {
+    background-color: rgb(228, 95, 43)!important; 
+    height:2.5em !important;
+    width:6.5em !important;
+    border:none !important;
+    font-family: "Lato", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: rgb(61, 61, 61) !important;
+    font-size:medium !important;
+    border-radius: 8px !important;
+    margin-left: 2%;
+  }
+
+
+  .btn-close{
+height: 1em !important;
+width: 1em !important;
+border-radius:100% !important;
+  }
+
+  
+  .btn-close:hover{
+    background-color: rgb(255, 247, 0) !important;
+    height: 1em !important;
+    width: 1em !important;
+    border-radius:100% !important;
+      }
+
+      .btn-close:active{
+        background-color: rgb(255, 247, 0) !important;
+        height: 1em !important;
+        width: 1em !important;
+        border-radius:100% !important;
+        outline: none !important;
+          }

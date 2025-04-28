@@ -1,13 +1,14 @@
 import React, { useState} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {Form,Button} from 'react-bootstrap'
 import '../styles/forms.css';
 import { register } from '../JS/actions/authAction';
+import Loading from '../components/Loading';
 
 
 const Register = () => {
-  
+  const isLoad=useSelector((state)=>state.auth.isLoad)
   const [newUser,setNewUser]=useState({
     name:"",email:"", password:"", city:"", phone:"",
   });
@@ -26,6 +27,7 @@ const Register = () => {
 
 return (
     <div>
+      {isLoad && <Loading/>}
        <div className='overlaylogin' style={{marginTop:"10rem",marginBottom:"8rem"}}>
        <Form className='Formulaire' onSubmit={handleRegister}>
          <Form.Text className="text-muted" style={{ display: "block", textAlign: "center", width: "100%" }}>
@@ -50,7 +52,7 @@ return (
       
       <Form.Group className="mb-3">
         <Form.Label>Adresse</Form.Label>
-        <Form.Control type="text" placeholder="Entrez votre adresse"  className="forminput"  name="city" // ← important
+        <Form.Control type="text" placeholder="Entrez votre adresse"  className="forminput"  name="city" 
     value={newUser.city}
     onChange={handleChange}/>
       </Form.Group>
@@ -64,7 +66,7 @@ return (
         <Form.Check className="custom-checkbox"  type="checkbox" label="Se souvenir de moi" />
       </Form.Group>
       <div className="Buttoncontainer">
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="buttonprincipal">
       Envoyer
       </Button>
       </div>

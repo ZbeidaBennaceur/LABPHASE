@@ -1,11 +1,13 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 const AdminRoute = ({ isAdmin }) => {
+
  // console.log(isAdmin);
 
   if (isAdmin === undefined) {
-    return <div>Chargement...</div>;
+    return <Loading/>;
   }
 
   if (!isAdmin) {

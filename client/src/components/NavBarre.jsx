@@ -1,15 +1,18 @@
 import React from 'react'
 import {Navbar, Nav, Container,NavDropdown} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import { logout } from '../JS/actions/authAction';
 import '../styles/navBarr.css';
 
 const NavBarre = () => {
+  const navigate=useNavigate()
   const dispatch=useDispatch()
   const isAuth = useSelector(state => state.auth.isAuth);
   const isAdmin=useSelector(state=>state.auth.user.isAdmin)
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/');
   };
   return (
     <div className="navbarrecontainer">

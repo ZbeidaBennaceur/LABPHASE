@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, LOAD_USER,DELETE_USER,FAIL_USER} from "../actionTypes/userActionType";
+import { GET_ALL_USERS, LOAD_USER,DELETE_USER,FAIL_USER, CLEAR_USER_ERRORS, CLEAR_USER_SUCCESS} from "../actionTypes/userActionType";
 
 
 
@@ -18,7 +18,9 @@ const initialState={
 const userReducer=(state=initialState,{type,payload})=> {
     switch (type) {
         case LOAD_USER: return{...state, isLoad:true}
-        case GET_ALL_USERS: return{...state,
+        case GET_ALL_USERS: 
+       // console.log(payload)
+        return{...state,
             isLoad:false,
             usersList:payload, 
             success:payload.success}
@@ -31,6 +33,17 @@ const userReducer=(state=initialState,{type,payload})=> {
             success:payload.success,
         }
          case FAIL_USER:return{...state,isLoad:false,errors:payload}
+
+         case CLEAR_USER_SUCCESS:
+         return {
+             ...state,success:[],
+         }
+         
+         case CLEAR_USER_ERRORS:
+         return {
+             ...state,errors:[], 
+            }
+
     default:return state;
        
     }

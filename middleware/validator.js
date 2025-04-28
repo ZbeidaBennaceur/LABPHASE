@@ -1,8 +1,5 @@
 const {check,validationResult} = require ('express-validator')
 
-
-
-
 exports.registerValidation=()=>[
     check("name","Le nom d'utilisateur est obligatoire").not().isEmpty(),
     check("email", "Veuillez entrer une adresse mail valide").isEmail(),

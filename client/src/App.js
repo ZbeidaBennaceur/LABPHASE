@@ -1,6 +1,7 @@
 
 import {Routes, Route } from 'react-router-dom';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -16,13 +17,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { current } from './JS/actions/authAction';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //import { Navigate } from 'react-router-dom';
 
 
 function App() {
   const dispatch = useDispatch();
-  const isAuth=useSelector(state=>state.auth.isAuth)
-  const user=useSelector(state=>state.auth.user)
+  const isAuth=useSelector((state)=>state.auth.isAuth)
+  const user=useSelector((state)=>state.auth.user)
+
+  //console.log(errors)
   //console.log(user)
   //console.log(user?.isAdmin)
 
@@ -34,6 +39,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className="App">
+      <ToastContainer limit={1} />
       <NavBarre/>
       <Routes>
         <Route path='/' element={<Home />} />
