@@ -1,0 +1,96 @@
+/* Style général pour le formulaire */
+.formcontainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(136,221,216,0.3);
+   border-radius: 20px;
+   margin-top: 60px;
+  }
+  
+ 
+  .formcontainer h2 {
+    text-align: center;
+    color: rgb(61, 61, 61);
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style des étiquettes */
+  .form-group {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color:rgb(61, 61, 61);
+  }
+  
+  /* Style des champs de sélection et des entrées */
+  select,
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    
+  }
+  
+  select:focus,
+  input[type="number"]:focus {
+    border-color:rgb(136,221,216) ;
+    outline: none;
+     border-radius: 8px 
+  }
+  
+  select option:hover {
+    background-color: rgb(255, 247, 0);
+    color: rgb(61, 61, 61);
+  }
+  
+  select option:disabled {
+    color: #bbb;
+  }
+  
+  .Buttoncontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+ 
+  .buttonprincipal{
+    margin-top: em;
+  }
+
+
+  
+
+  .formcontainer label,
+  .formcontainer select,
+  .formcontainer input {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+ 
+  .form-group:last-child {
+    margin-bottom: 20px;
+  }
+  
+
+  
+
+  @media (max-width: 768px) {
+    .formcontainer {
+      padding: 15px;
+    }
+  
+    .formcontainer h2 {
+      font-size: 20px;
+    }
+  
+
+  }

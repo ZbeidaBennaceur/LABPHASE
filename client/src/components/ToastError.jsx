@@ -1,39 +1,38 @@
 import React, { useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { clearError } from '../JS/actions/authAction';
-import { clearErrorUser } from '../JS/actions/userAction';
 
-const ToastError = ({ error }) => {
+const ToastError = ({ errors }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error && error.length > 0) {
-      error.forEach((err) => {
-        toast.error(err.msg, {
+    if (Array.isArray(errors)) {
+      // Affiche chaque toast pour chaque erreur dans le tableau
+      errors.map((error, i) => 
+        toast.error(error.msg, {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
+          closeOnClick: false,
           draggable: true,
           progress: undefined,
           theme: "light",
-          toastId: err.msg,
-        });
-      });
-
-    
-      const timer = setTimeout(() => {
-        dispatch(clearError());
-        dispatch(clearErrorUser());
-      }, 3000);
-
-      return () => clearTimeout(timer);
+          toastId: `${error.msg}-${Date.now()}` // Utilisation de `Date.now()` pour éviter les doublons
+        })
+      );
     }
-  }, [error, dispatch]);
+
+    const timer = setTimeout(() => {
+      dispatch(clearError());
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [errors, dispatch]);
 
   return <ToastContainer limit={1} />;
 };
 
 export default ToastError;
+

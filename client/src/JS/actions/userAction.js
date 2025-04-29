@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 
-const { LOAD_USER, GET_ALL_USERS, FAIL_USER, DELETE_USER, CLEAR_USER_ERRORS, CLEAR_USER_SUCCESS } = require("../actionTypes/userActionType")
+const { LOAD_USER, GET_ALL_USERS, FAIL_USER, DELETE_USER} = require("../actionTypes/userActionType")
 
 
 
@@ -49,14 +49,4 @@ export const deleteUser=(id)=>async(dispatch)=>{
     }
 }
 
-export const clearErrorUser=()=>{
-    return {
-        type:CLEAR_USER_ERRORS
-    }
-}
 
-export const clearSuccessUser=()=>{
-    return {
-        type:CLEAR_USER_SUCCESS
-    }
-}

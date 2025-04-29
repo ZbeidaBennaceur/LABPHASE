@@ -17,8 +17,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { current } from './JS/actions/authAction';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ToastError from './components/ToastError';
 //import { Navigate } from 'react-router-dom';
 
 
@@ -26,6 +26,7 @@ function App() {
   const dispatch = useDispatch();
   const isAuth=useSelector((state)=>state.auth.isAuth)
   const user=useSelector((state)=>state.auth.user)
+  const errors=useSelector((state)=>state.auth.errors)
 
   //console.log(errors)
   //console.log(user)
@@ -39,7 +40,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className="App">
-      <ToastContainer limit={1} />
+   <ToastError errors={errors}/>
       <NavBarre/>
       <Routes>
         <Route path='/' element={<Home />} />

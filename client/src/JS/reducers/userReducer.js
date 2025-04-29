@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, LOAD_USER,DELETE_USER,FAIL_USER, CLEAR_USER_ERRORS, CLEAR_USER_SUCCESS} from "../actionTypes/userActionType";
+import { GET_ALL_USERS, LOAD_USER,DELETE_USER,FAIL_USER} from "../actionTypes/userActionType";
 
 
 
@@ -34,15 +34,6 @@ const userReducer=(state=initialState,{type,payload})=> {
         }
          case FAIL_USER:return{...state,isLoad:false,errors:payload}
 
-         case CLEAR_USER_SUCCESS:
-         return {
-             ...state,success:[],
-         }
-         
-         case CLEAR_USER_ERRORS:
-         return {
-             ...state,errors:[], 
-            }
 
     default:return state;
        
