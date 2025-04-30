@@ -21,6 +21,10 @@ app.use("/api/auth", require('./routes/auth.route'));
 //ROUTE MANIPULATION USERS PAR ADMIN
 app.use("/api/user",require("./routes/user.route"))
 
+//ROUTE MANIPULATION PISCINE
+app.use('/api/piscines',require("./routes/piscine.route"))
+
+
 //03 PORT
 const PORT= process.env.PORT || 7500;
 
@@ -31,4 +35,3 @@ app.listen(PORT,(err)=>{
     console.error(err):console.log(`The server is on the port: http://localhost:${PORT}`);
 });
 
-//COURS 03 NEXT

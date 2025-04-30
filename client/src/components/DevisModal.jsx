@@ -9,7 +9,7 @@ const DevisModal = ({ devis, showModal, handleClose, handleShow }) => {
           <Modal.Title>Devis Estimé</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Le devis estimé pour votre piscine est : <strong>{devis.toFixed(2)} DT</strong>
+          Le devis estimé pour votre piscine est de: <strong>{devis.toFixed(2)} DT</strong>
         </Modal.Body>
         <Modal.Footer>
           <Button className='buttonsecondary' variant="secondary" onClick={handleClose}>Sauvegarder

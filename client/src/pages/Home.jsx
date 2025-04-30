@@ -1,12 +1,18 @@
 import React from 'react';
 import '../styles/home.css';
 import {useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import Loading from '../components/Loading';
+
 
 const Home = () => {
+  const isLoad=useSelector((state)=>state.auth.isLoad)
   const navigate=useNavigate()
   const handleClick=()=>{navigate('/simulateur')}
   return (
+     
     <div className="home-container">
+      {isLoad && <Loading/>}
       <img src="/Images/PiscineImageHome.jpg" alt="Piscine" className="background-image" />
 
       <div className="overlay">

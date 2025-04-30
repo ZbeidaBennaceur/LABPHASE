@@ -25,6 +25,7 @@ body{
     color:white !important;
     font-size:larger !important;
     border-radius: 8px !important;
+    margin-top: 2em !important;
   }
 
 .buttonprincipal:hover{
@@ -38,6 +39,7 @@ body{
     color: rgb(61, 61, 61) !important;
     font-size:larger !important;
     border-radius: 8px !important;
+    margin-top: 2em !important;
   }
 
   .buttonprincipal:active{
@@ -51,6 +53,7 @@ body{
     color:white !important;
     font-size:larger !important;
     border-radius: 8px !important;
+    margin-top: 2em !important;
   }
 
   .custom-checkbox input[type="checkbox"]{

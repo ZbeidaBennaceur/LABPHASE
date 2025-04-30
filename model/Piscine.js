@@ -21,14 +21,14 @@ const piscineSchema = new mongoose.Schema(
     longueur: {
       type: Number,
       required: true,
-      min: [1, 'La longueur doit être supérieure à 1m'],
-      max: [50, 'La longueur ne peut pas dépasser 50m'],
+      min: [3, 'La longueur doit être supérieure à 3m'],
+      max: [20, 'La longueur ne peut pas dépasser 20m'],
     },
     largeur: {
       type: Number,
       required: true,
-      min: [1, 'La largeur doit être supérieure à 1m'],
-      max: [20, 'La largeur ne peut pas dépasser 20m'],
+      min: [2, 'La largeur doit être supérieure à 2m'],
+      max: [10, 'La largeur ne peut pas dépasser 10m'],
     },
     diametre: {
       type: Number,
@@ -39,8 +39,8 @@ const piscineSchema = new mongoose.Schema(
     profondeur: {
       type: Number,
       required: true,
-      min: [1, 'La profondeur doit être supérieure à 1m'],
-      max: [10, 'La profondeur ne peut pas dépasser 10m'],
+      min: [0.5, 'La profondeur doit être supérieure à 0.5m'],
+      max: [2, 'La profondeur ne peut pas dépasser 2m'],
     },
     systeme: {
       type: String,
@@ -55,7 +55,7 @@ const piscineSchema = new mongoose.Schema(
     margelle: {
       type: String,
       required: true,
-      enum: ['Pas de margelle', 'Béton', 'Bois'],
+      enum: ['Pas de margelle', 'Pierre', 'Marbre','Grès'],
     },
 
     filtration: {
@@ -82,12 +82,12 @@ const piscineSchema = new mongoose.Schema(
     eclairage: {
       type: String,
       required: true,
-      enum: ['LED coloré', 'LED blancs', 'Pas d\'éclairage'],
+      enum: ['LED colorés', 'LED blancs', 'Pas d\'éclairage'],
       default: "Pas d'éclairage",
     },
   },
   { timestamps: true }
 );
 
-const Piscine = mongoose.model('piscine', piscineSchema);
+const Piscine = mongoose.model('Piscine', piscineSchema);
 module.exports = Piscine;

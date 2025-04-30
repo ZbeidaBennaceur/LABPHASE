@@ -15,13 +15,15 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
   const [filtration, setFiltration] = useState('Filtre à sable');
   const [traitement, setTraitement] = useState('Chlore');
   const [local, setLocal] = useState('Coffret hors sol');
-  const [couverture, setCouverture] = useState('Bâche');
+  const [couverture, setCouverture] = useState('Pas de couverture');
   const [eclairage, setEclairage] = useState("Pas d'éclairage");
 
   const calculerDevis = (data) => {
     let prixDevis = 0;
     let surfacePiscine = 0;
     let perimetrePiscine = 0;
+    let prixProfondeur=0;
+  
 
     if (data.forme === "Rectangulaire") {
       surfacePiscine = data.longueur * data.largeur;
@@ -37,18 +39,23 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
       perimetrePiscine = 2 * Math.PI * rayon;
     }
 
-    prixDevis = surfacePiscine * data.profondeur * 150;
+    prixDevis = surfacePiscine * data.profondeur * 900; //calcul du prix de base selon le volume
+    prixDevis+=surfacePiscine*250 //calcul du revetement au sol
+    prixDevis+=data.profondeur*perimetrePiscine*250 //calcul du revetement mural
 
     if (data.systeme === "Skimmer") {
       prixDevis += 1500;
     } else {
-      prixDevis += 2000;
+      prixDevis += 3000;
     }
 
-    if (data.margelle === "Béton") {
+    if (data.margelle === "Pierre") {
       prixDevis += perimetrePiscine * 100;
-    } else if (data.margelle === "Bois") {
+    } else if (data.margelle === "Marbre") {
       prixDevis += perimetrePiscine * 200;
+    }
+    else if (data.margelle === "Grès") {
+      prixDevis += perimetrePiscine * 180;
     }
 
     if (data.filtration === "Filtre à sable") {
@@ -57,24 +64,24 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
       prixDevis += 800;
     }
 
-    if (data.traitement === "Sel") {
+    if (data.traitement  === "Sel" || data.traitement==="Chlore") {
       prixDevis += 200;
     } else if (data.traitement === "Brome") {
       prixDevis += 600;
     }
 
     if (data.local === "Coffret enterré") {
-      prixDevis += 1500;
+      prixDevis += 3000;
     } else {
       prixDevis += 1000;
     }
 
     if (data.couverture === "Bâche") {
-      prixDevis += 20 * surfacePiscine;
+      prixDevis += 100 * surfacePiscine;
     } else if (data.couverture === "Volet manuel") {
-      prixDevis += 30 * surfacePiscine;
+      prixDevis += 300 * surfacePiscine;
     } else if (data.couverture === "Volet motorisé") {
-      prixDevis += 40 * surfacePiscine;
+      prixDevis += 500 * surfacePiscine;
     }
 
     if (data.eclairage === "LED blancs") {
@@ -82,8 +89,15 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
     } else if (data.eclairage === "LED colorés") {
       prixDevis += 50 * perimetrePiscine;
     }
+    if (data.emplacement==="Enterrée"){prixDevis+=1500}
 
-    return Math.round(prixDevis/0.2)*0.2;
+ prixProfondeur=data.profondeur*200
+ prixDevis+=prixProfondeur
+
+
+
+
+    return Math.round(prixDevis*5)/5;
   };
 
   const handleSubmit = (e) => {
@@ -118,7 +132,7 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
     const devis = calculerDevis(data);
     setDevis(devis);
     handleShow();
-   // console.log("Devis Calculé: ", devis);
+  console.log("Devis Calculé: ", devis);
   };
 
   return (
@@ -145,8 +159,8 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
             type="number"
             value={diametre}
             onChange={(e) => setDiametre(e.target.value)}
-            step="any"
-            min="0"
+            step="0.1"
+            min="2"
             required
           />
         </>
@@ -160,7 +174,8 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
             value={longueur}
             onChange={(e) => setLongueur(e.target.value)}
             step="0.1"
-            min="2"
+            min="3"
+            max="20"
             required
           />
           <label className="form-group">Largeur:</label>
@@ -170,6 +185,7 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
             onChange={(e) => setLargeur(e.target.value)}
             step="0.1"
             min="2"
+            max="10"
             required
           />
         </>
@@ -182,6 +198,7 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
         onChange={(e) => setProfondeur(e.target.value)}
         step="0.1"
         min="0.5"
+        max="2"
         required
       />
 
@@ -198,8 +215,9 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
       <label className="form-group">Margelle:</label>
       <select value={margelle} onChange={(e) => setMargelle(e.target.value)}>
         <option value="Pas de margelle">Pas de margelle</option>
-        <option value="Béton">Béton</option>
-        <option value="Bois">Bois</option>
+        <option value="Pierre">Pierre</option>
+        <option value="Marbre">Marbre</option>
+        <option value="Grès">Grès</option>
       </select>
 
       <label className="form-group">Système:</label>
@@ -231,6 +249,7 @@ const FormulairePiscine = ({ setDevis,handleShow }) => {
 
       <label className="form-group">Couverture:</label>
       <select value={couverture} onChange={(e) => setCouverture(e.target.value)}>
+      <option value="Pas de couverture">Pas de couverture</option>
         <option value="Bâche">Bâche</option>
         <option value="Volet manuel">Volet manuel</option>
         <option value="Volet motorisé">Volet motorisé</option>
