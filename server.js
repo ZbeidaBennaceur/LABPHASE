@@ -4,12 +4,19 @@ const express=require("express")
 require("dotenv").config()
 
 
+const cors = require('cors');
+
+
+
 const connectDB = require ('./config/connectDB')
 
 //02 INSTANCE OF EXPRESS
 const app=express()
 
 //MIDDLEWARE
+app.use(cors({
+    origin: 'https://Azuréa-Piscines.netlify.app'
+  }));
 app.use(express.json())
 
 //05 CONNEC DB
