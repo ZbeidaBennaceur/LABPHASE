@@ -15,7 +15,7 @@ const app=express()
 
 //MIDDLEWARE
 app.use(cors({
-    origin: 'https://Azuréa-Piscines.netlify.app'
+origin: 'https://azureapiscines.netlify.app'
   }));
 app.use(express.json())
 
