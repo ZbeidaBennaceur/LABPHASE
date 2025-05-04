@@ -40,8 +40,10 @@ export const deleteUser=(id)=>async(dispatch)=>{
         dispatch({
             type:DELETE_USER, 
             payload:result.data.UserToDelete,
+
             
-        });
+        })
+        dispatch(getUsers());
         
     } catch (error) {
         dispatch({type:FAIL_USER,payload:error.response.data.errors})

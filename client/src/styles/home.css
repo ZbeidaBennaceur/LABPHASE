@@ -18,12 +18,23 @@
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    font-size:3rem;
+    font-size:3em;
     text-align: center;
     color: rgb(61, 61, 61);
     margin-top:5%;
   }
 
+  .titresecondaire{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size:2em;
+    text-align: center;
+    color: rgb(136,221,216);
+    margin-top:2%;
+
+  }
 
   .background-image {
     width: 100%;

@@ -1,21 +1,30 @@
 import React from 'react';
+import '../styles/home.css';
+import {useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
 
+
 const Profile = () => {
   const isLoad=useSelector((state)=>state.auth.isLoad)
-  const user = useSelector(state => state.auth.user);
-  console.log('Utilisateur connecté :', user);
-
+  const navigate=useNavigate()
+  const handleClick=()=>{navigate('/simulateur')}
   return (
-    <div>
+     
+    <div className="home-container">
       {isLoad && <Loading/>}
-      {user && user.name ? (
-        <h3>Bienvenue {user.name}</h3>
-      ) : (
-        <h1>Bienvenue</h1>
-      )}
-    </div>
-  ); }
+      <img src="/Images/PiscineImageHome.jpg" alt="Piscine" className="background-image" />
 
-export default Profile;
+      <div className="overlay">
+        <div className="textContainer">
+      <h2 className="titre"> Votre piscine en quelques clics</h2>
+      <div className="button-container">
+      <button type="submit" onClick={handleClick} className='buttonprincipal' >Votre devis ici</button>
+      </div>
+      </div>
+    </div>
+    </div>
+  )
+}
+
+export default Profile

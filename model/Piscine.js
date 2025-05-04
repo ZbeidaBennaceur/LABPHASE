@@ -85,6 +85,12 @@ const piscineSchema = new mongoose.Schema(
       enum: ['LED colorés', 'LED blancs', 'Pas d\'éclairage'],
       default: "Pas d'éclairage",
     },
+    pdfUrl: {
+      type: String,
+    },
+    //userName: {
+      //type: String
+   // },
   },
   { timestamps: true }
 );

@@ -22,7 +22,10 @@ app.use("/api/auth", require('./routes/auth.route'));
 app.use("/api/user",require("./routes/user.route"))
 
 //ROUTE MANIPULATION PISCINE
-app.use('/api/piscines',require("./routes/piscine.route"))
+app.use('/api/piscines', require('./routes/piscine.route'));
+
+
+
 
 
 //03 PORT

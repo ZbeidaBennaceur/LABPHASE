@@ -6,8 +6,8 @@ import ToSupprimer from './ToSupprimer'
 const User = ({user}) => {
   const [details,setDetail]=useState(false)
   const [supprimer,setSupprimer]=useState(false)
-    console.log(user)
-    console.log(user.timestamp)
+    //console.log(user)
+   // console.log(user.timestamp)
   return (
     <div>
 <Card className="text-center" style={{margin:"auto" ,width:"80%" ,marginTop:"2rem"}}>

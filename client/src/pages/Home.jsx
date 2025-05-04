@@ -1,30 +1,41 @@
 import React from 'react';
-import '../styles/home.css';
-import {useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Loading from '../components/Loading';
-
+import Carroussel from '../components/Carroussel';
+import CardsOffres from '../components/CardsOffres';
+import AzureaEnChiffre from '../components/AzureaEnChiffre';
 
 const Home = () => {
   const isLoad=useSelector((state)=>state.auth.isLoad)
-  const navigate=useNavigate()
-  const handleClick=()=>{navigate('/simulateur')}
+  const user = useSelector(state => state.auth.user);
+ // console.log('Utilisateur connecté :', user);
+
+ 
+
   return (
-     
-    <div className="home-container">
+    <div>
       {isLoad && <Loading/>}
-      <img src="/Images/PiscineImageHome.jpg" alt="Piscine" className="background-image" />
+      {user && user.name ? (
+        <h3 className='titre'>Bienvenue {user.name}</h3>
+      ) : (
+        <h3 className='titre'>Bienvenue</h3>
+      )}
+      <h3 className='titresecondaire'>Nos réalisations</h3>
+      <Carroussel/>
 
-      <div className="overlay">
-        <div className="textContainer">
-      <h2 className="titre"> Votre piscine en quelques clics</h2>
-      <div className="button-container">
-      <button type="submit" onClick={handleClick} className='buttonprincipal' >Votre devis ici</button>
-      </div>
-      </div>
-    </div>
-    </div>
-  )
-}
+      <h3 className='titresecondaire'>Azuréa en chiffres</h3>
+      <AzureaEnChiffre/>
 
-export default Home
+     <h3 className='titresecondaire'>Nos services</h3>
+     <CardsOffres/>
+
+    </div>
+
+  ); }
+
+export default Home;
+
+
+
+
+

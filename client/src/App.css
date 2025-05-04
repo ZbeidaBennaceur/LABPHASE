@@ -1,168 +1,179 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-body{
-    font-family: "Montserrat", sans-serif;
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 
-  .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    margin-top: 5%;         
-  }
-
-  
-.buttonprincipal{
-    background-color: rgb(136,221,216) !important; 
-    height:2.5em !important;
-    width:8em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color:white !important;
-    font-size:larger !important;
-    border-radius: 8px !important;
-    margin-top: 2em !important;
-  }
-
-.buttonprincipal:hover{
-    background-color: rgb(255, 247, 0) !important;
-    height:2.5em !important;
-    width:8em !important; 
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color: rgb(61, 61, 61) !important;
-    font-size:larger !important;
-    border-radius: 8px !important;
-    margin-top: 2em !important;
-  }
-
-  .buttonprincipal:active{
-    background-color: rgb(136,221,216) !important;
-    height:2.5em!important;
-    width:8em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color:white !important;
-    font-size:larger !important;
-    border-radius: 8px !important;
-    margin-top: 2em !important;
-  }
-
-  .custom-checkbox input[type="checkbox"]{
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(136,221,216);
-  }
-
-  .custom-checkbox input[type="checkbox"]:checked {
-    background-color: rgb(136,221,216);
-  }
-
-  .custom-checkbox input[type="checkbox"]:focus {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  .forminput:focus {
-    outline: none !important;
-    box-shadow: 0 0 0 2px rgba(136,221,216, 0.5) !important;
-    border-color: rgb(136,221,216) !important;
-  }
-
-  .buttonsecondary{
-    background-color: rgb(136,221,216) !important; 
-    height:2.5em !important;
-    width:6.5em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color:white !important;
-    font-size:medium !important;
-    border-radius: 8px !important;
-  }
-  .buttonsecondary:hover{
-    background-color:rgb(136,221,216) !important;
-    height:2.5em !important;
-    width:6.5em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color: rgb(61, 61, 61) !important;
-    font-size:medium !important;
-    border-radius: 8px !important;
-  }
-
-  .buttonsecondary:active{
-    background-color: rgb(136,221,216) !important;
-    height:2.5em !important;
-    width:6.5em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color:white !important;
-    font-size:medium !important;
-    border-radius: 8px !important;
-    text-align: center;
-  }
-
-  .buttonsecondarydel{
-    background-color:rgb(228, 95, 43)!important; 
-    height:2.5em !important;
-    width:6.5em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color: white !important;
-    font-size:medium !important;
-    border-radius: 8px !important;
-    margin-left: 2%;
-  }
-
-  .buttonsecondarydel:active,  .buttonsecondarydel:hover {
-    background-color: rgb(228, 95, 43)!important; 
-    height:2.5em !important;
-    width:6.5em !important;
-    border:none !important;
-    font-family: "Lato", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    color: rgb(61, 61, 61) !important;
-    font-size:medium !important;
-    border-radius: 8px !important;
-    margin-left: 2%;
-  }
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 
-  .btn-close{
-height: 1em !important;
-width: 1em !important;
-border-radius:100% !important;
-  }
+.App > .main-content {
+  flex: 1;
+}
 
-  
-  .btn-close:hover{
-    background-color: rgb(255, 247, 0) !important;
-    height: 1em !important;
-    width: 1em !important;
-    border-radius:100% !important;
-      }
 
-      .btn-close:active{
-        background-color: rgb(255, 247, 0) !important;
-        height: 1em !important;
-        width: 1em !important;
-        border-radius:100% !important;
-        outline: none !important;
-          }
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.buttonprincipal {
+  background-color: rgb(136, 221, 216) !important;
+  height: 2.5rem !important;
+  width: 10rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1.125rem !important;
+  border-radius: 0.5rem !important;
+  margin-top: 2rem !important;
+}
+
+.buttonprincipal:hover {
+  background-color: rgb(255, 247, 0) !important;
+  color: rgb(61, 61, 61) !important;
+}
+
+.buttonprincipal:active {
+  background-color: rgb(136, 221, 216) !important;
+  color: white !important;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  border: solid 1px rgb(136, 221, 216);
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
+  background-color: rgb(136, 221, 216);
+}
+
+.custom-checkbox input[type="checkbox"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.forminput:focus, .formlabel:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0.125rem rgba(136, 221, 216, 0.5) !important;
+  border-color: rgb(136, 221, 216) !important;
+}
+
+.buttonsecondary {
+  background-color: rgb(136, 221, 216) !important;
+  height: 2.5rem !important;
+  width: 6.5rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem !important;
+}
+
+.buttonsecondary:hover {
+  color: rgb(61, 61, 61) !important;
+}
+
+.buttonsecondary:active {
+  color: white !important;
+  text-align: center;
+}
+
+.buttonthird {
+  background-color: rgb(136, 221, 216) !important;
+  height: 2.5rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem !important;
+  text-align: center;
+}
+
+.buttonthird:active, .buttonthird:hover {
+  color: white !important;
+}
+
+.buttonsecondarydel {
+  background-color: rgb(228, 95, 43) !important;
+  height: 2.5rem !important;
+  width: 6.5rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-left: 2%;
+}
+
+.buttonsecondarydel:active, .buttonsecondarydel:hover {
+  color: rgb(61, 61, 61) !important;
+}
+
+.buttonsecondaryimp {
+  background-color: rgb(147, 147, 147) !important;
+  height: 2.5rem !important;
+  width: 10rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-left: 2%;
+}
+
+.buttonsecondaryimp:active, .buttonsecondaryimp:hover {
+  color: rgb(61, 61, 61) !important;
+}
+
+.btn-close {
+  height: 1rem !important;
+  width: 1rem !important;
+  border-radius: 100% !important;
+}
+
+.btn-close:hover, .btn-close:active {
+  background-color: rgb(255, 247, 0) !important;
+  outline: none !important;
+}
+
+.buttonsecondaryedit {
+  background-color: rgb(185, 222, 157) !important;
+  height: 2.5rem !important;
+  width: 6.5rem !important;
+  border: none !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: white !important;
+  font-size: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-left: 2%;
+}
+
+.buttonsecondaryedit:active, .buttonsecondaryedit:hover {
+  color: rgb(61, 61, 61) !important;
+}

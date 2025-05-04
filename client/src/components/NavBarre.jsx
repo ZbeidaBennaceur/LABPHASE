@@ -16,39 +16,47 @@ const NavBarre = () => {
   };
   return (
     <div className="navbarrecontainer">
-       <Navbar expand="md" className="bg-body-tertiary sticky-top navbarre">
-      <Container >
-        <Navbar.Brand href="/">  <img src="/Images/LOGO.png" alt="Logo" className="logo" style={{height:"80px"}}/></Navbar.Brand>
+    <Navbar expand="md" className="bg-body-tertiary sticky-top navbarre">
+      <Container>
+        <Navbar.Brand href="/">
+          <img src="/Images/LOGO.png" alt="Logo" className="logo" style={{ height: '80px' }} />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto nav-center">
-            <Nav.Link className='ButtonNav' href="/">Accueil</Nav.Link>
+            <Nav.Link className="ButtonNav" href="/">Accueil</Nav.Link>
             {!isAuth && (
-                <>
-                  <Nav.Link className='ButtonNav' href="/login">S'identifier</Nav.Link>
-                  <Nav.Link className='ButtonNav' href="/register">Créer un compte</Nav.Link>
-                </>
-              )}
-
-              {isAuth && (
-                <NavDropdown className='ButtonNav' title="Mon profil" id="basic-nav-dropdown">
-                  <NavDropdown.Item className='ButtonNavDrop' href="/mesdevis">Mes devis</NavDropdown.Item>
-                  <NavDropdown.Item className='ButtonNavDrop' href="/profile">Gérer mon compte</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item className='ButtonNavDrop'onClick={handleLogout}>
-                    Déconnexion
+              <>
+                <Nav.Link className="ButtonNav" href="/login">S'identifier</Nav.Link>
+                <Nav.Link className="ButtonNav" href="/register">Créer un compte</Nav.Link>
+              </>
+            )}
+            {isAuth && (
+              <NavDropdown className="ButtonNav" title="Mon profil" id="basic-nav-dropdown">
+                <NavDropdown.Item className="ButtonNavDrop" href="/profile">
+                    Mon compte
                   </NavDropdown.Item>
-                </NavDropdown>
-              )}
-            <Nav.Link className='ButtonNav' href="/simulateur">Simulateur</Nav.Link>
-            <Nav.Link  className='ButtonNav' href="/chat">Discutez avec nous</Nav.Link>
+                {!isAdmin && (
+                  <NavDropdown.Item className="ButtonNavDrop" href="/mesdevis">
+                    Mes devis
+                  </NavDropdown.Item>
+                )}
+
+                <NavDropdown.Divider />
+                <NavDropdown.Item className="ButtonNavDrop" onClick={handleLogout}>
+                  Déconnexion
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
+            <Nav.Link className="ButtonNav" href="/simulateur">Simulateur</Nav.Link>
+            {!isAdmin && <Nav.Link className="ButtonNav" href="/chat">Discutez avec nous</Nav.Link>}
+            {isAdmin && <Nav.Link className="ButtonNav" href="/alldevis">Devis</Nav.Link>}
+            {isAdmin && <Nav.Link className="ButtonNav" href="/dashboard">Tableau de bord</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
-        {isAdmin &&( <Nav.Link className='ButtonNav' href="/dashboard">Tableau de bord</Nav.Link>)}
-       
       </Container>
     </Navbar>
-    </div>
+  </div>
   )
 }
 
