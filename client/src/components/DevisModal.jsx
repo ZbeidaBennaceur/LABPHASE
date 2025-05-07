@@ -66,6 +66,7 @@ const DevisModal = ({ devis, showModal, handleClose }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
+       {!isAuth &&(<p>Si vous souhaitez enregistrer ce devis, veuillez vous <a style={{textDecoration:"none", color:"rgb(136, 221, 216)"}} href='/login'>connecter</a> ou vous <a style={{textDecoration:"none", color:"rgb(136, 221, 216)"}} href='/register'>enregistrer</a>.</p>)}
         {isAuth && (
           <Button className='buttonsecondary' variant="secondary" onClick={handleSave}>
             Sauvegarder

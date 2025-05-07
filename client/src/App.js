@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { current } from './JS/actions/authAction';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastError from './components/ToastError';
+//import ToastError from './components/ToastError';
 import Loading from './components/Loading';
 import AllDevis from './pages/AllDevis';
 import DevisUtilisateur from './pages/DevisUtilisateur';
@@ -30,7 +30,7 @@ function App() {
   const dispatch = useDispatch();
   const isAuth=useSelector((state)=>state.auth.isAuth)
   const user=useSelector((state)=>state.auth.user)
-  const errors=useSelector((state)=>state.auth.errors)
+ // const errors=useSelector((state)=>state.auth.errors)
   const isLoad=useSelector((state)=>state.auth.isLoad)
 
 
@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App">
     {isLoad && <Loading />}
-    <ToastError errors={errors} />
+   {/*<ToastError errors={errors} />*/}
     <NavBarre />
     
     <div className="main-content">
@@ -62,7 +62,7 @@ function App() {
         )}
         <Route path='/chat' element={<Chat />} />
         <Route path='/mesdevis' element={<MesDevis />} />
-        <Route path='/simulateur' element={<Simulateur />} />
+        <Route path='/simulateur' element={<Simulateur/>} />
         <Route element={<AdminRoute isAdmin={user?.isAdmin} />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alldevis" element={<AllDevis />} />

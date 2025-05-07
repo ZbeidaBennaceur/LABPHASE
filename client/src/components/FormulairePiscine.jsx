@@ -62,7 +62,7 @@ const FormulairePiscine = ({ setDevis,handleShow}) => {
     setDevis(dataComplet);
     handleShow();
   
-    console.log(dataComplet);
+  //  console.log(dataComplet);
   };
  
   

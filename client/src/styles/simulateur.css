@@ -1,8 +1,8 @@
 /* Style général pour le formulaire */
 .formcontainer {
-    width: 100%;
+    width: 90%;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 5rem auto;
     padding: 20px;
     background-color: rgb(136,221,216,0.3);
    border-radius: 20px;

@@ -5,7 +5,7 @@ import {Form,Button} from 'react-bootstrap'
 import '../styles/forms.css';
 import { register } from '../JS/actions/authAction';
 import Loading from '../components/Loading';
-
+import ToastError from '../components/ToastError';
 
 const Register = () => {
   const isLoad=useSelector((state)=>state.auth.isLoad)
@@ -15,19 +15,23 @@ const Register = () => {
 
   const navigate = useNavigate();
   const dispatch=useDispatch()
+  const [submitted,setSubmitted]=useState(false)
+ 
   const handleChange=(e)=>{
     setNewUser({...newUser,[e.target.name]:e.target.value})
   };
   const handleRegister=(e)=>{
     e.preventDefault()
+    setSubmitted(true)
     dispatch(register(newUser,navigate));
   };
 
-
+const errors=useSelector((state)=>state.auth.errors)
 
 return (
     <div>
       {isLoad && <Loading/>}
+      {submitted && errors.length > 0 && newUser.name && <ToastError errors={errors} />}
        <div className='overlaylogin' style={{marginTop:"10rem",marginBottom:"8rem"}}>
        <Form className='Formulaire' onSubmit={handleRegister}>
          <Form.Text className="text-muted" style={{ display: "block", textAlign: "center", width: "100%" }}>
