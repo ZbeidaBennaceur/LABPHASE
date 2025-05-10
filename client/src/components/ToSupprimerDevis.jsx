@@ -6,6 +6,7 @@ import { Modal, Button } from 'react-bootstrap';
 const ToSupprimerDevis = ({show,handleClose,piscine}) => {
     const dispatch=useDispatch()
     const handleDelete=()=>{
+       console.log("🗑 Suppression déclenchée pour :", piscine._id);
         dispatch(deletePiscine(piscine._id));
         handleClose() }
     

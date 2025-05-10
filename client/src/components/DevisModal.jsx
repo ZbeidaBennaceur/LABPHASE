@@ -8,33 +8,31 @@ const DevisModal = ({ devis, showModal, handleClose }) => {
   const dispatch = useDispatch();
   const isAuth = useSelector(state => state.auth.isAuth);
 
-  const handleSave = () => {
-   // console.log("handleSave déclenché");
-
-    const data = {
-      emplacement: devis.emplacement,
-      forme: devis.forme,
-      longueur: Number(devis.longueur),
-      largeur: Number(devis.largeur),
-      profondeur: Number(devis.profondeur),
-      diametre: Number(devis.diametre),
-      systeme: devis.systeme,
-      couleur: devis.couleur,
-      margelle: devis.margelle,
-      filtration: devis.filtration,
-      traitement: devis.traitement,
-      local: devis.local,
-      couverture: devis.couverture,
-      eclairage: devis.eclairage,
-      devis: Number(devis.devis)
-    };
-
-    dispatch(createPiscine(data));
-  
-   // console.log(data);
-    handleClose();
+ const handleSave = () => {
+  const data = {
+    forme: devis.forme,
+    longueur: Number(devis.longueur),
+    largeur: Number(devis.largeur),
+    profondeur: Number(devis.profondeur),
+    systeme: devis.systeme,
+    couleur: devis.couleur,
+    margelle: devis.margelle,
+    filtration: devis.filtration,
+    traitement: devis.traitement,
+    local: devis.local,
+    couverture: devis.couverture,
+    eclairage: devis.eclairage,
+    devis: Number(devis.devis),
+    nomImage: devis.nomImage,
   };
 
+  if (devis.forme === "Ronde") {
+    data.diametre = Number(devis.diametre);
+  }
+
+  dispatch(createPiscine(data));
+  handleClose();
+};
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -42,7 +40,6 @@ const DevisModal = ({ devis, showModal, handleClose }) => {
       </Modal.Header>
       <Modal.Body>
         <div id="devis-content">
-          <p><strong>Emplacement :</strong> {devis.emplacement}</p>
           <p><strong>Forme :</strong> {devis.forme}</p>
           {devis.forme === "ronde" ? (
             <p><strong>Diamètre :</strong> {devis.diametre} m</p>

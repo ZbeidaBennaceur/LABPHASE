@@ -69,10 +69,9 @@ export const calculerPrixPiscine = (data) => {
       prixDevis += 50 * perimetrePiscine;
     }
   
-    if (data.emplacement === "Enterrée") {
-      prixDevis += 1500;
-    }
-  
+   
+    
+    prixDevis += 1500;
     prixProfondeur = data.profondeur * 200;
     prixDevis += prixProfondeur;
   

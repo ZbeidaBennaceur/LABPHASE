@@ -52,6 +52,7 @@ import {
           };
   
       case EDIT_PISCINE:
+        // console.log("EDIT_PISCINE déclenché :", payload);
         return {
           ...state,
           loadP: false,
@@ -63,6 +64,7 @@ import {
         };
   
       case DELETE_PISCINE:
+          //console.log("DELETE_PISCINE déclenché :", payload);
         return {
           ...state,
           loadP: false,

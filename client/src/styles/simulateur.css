@@ -94,3 +94,11 @@
   
 
   }
+
+.zoomImg {
+  transition: transform 0.3s ease;
+}
+
+.zoomImg:hover {
+  transform: scale(2);
+}

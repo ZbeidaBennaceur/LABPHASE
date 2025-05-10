@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import {editPiscine } from '../JS/actions/piscineAction';
+import { editPiscine } from '../JS/actions/piscineAction';
 import EditPiscine from './EditPiscine';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ToSupprimerDevis from './ToSupprimerDevis';
 
-
-
-const DevisCard = ({ piscine, index,devis}) => {
-  const [showModal, setShowModal] = useState(false);
+const DevisCard = ({ piscine, index, devis }) => {
   const dispatch = useDispatch();
- 
+  const [showModal, setShowModal] = useState(false);
+  const [supprimer, setSupprimer] = useState(false);
 
   const formatDevisNumber = (date) => {
     const d = new Date(date);
@@ -22,11 +20,9 @@ const DevisCard = ({ piscine, index,devis}) => {
     return `${day}${month}${year}`;
   };
 
-  const [supprimer,setSupprimer]=useState(false)
-
-
   const handleSave = (updatedPiscine) => {
     dispatch(editPiscine(updatedPiscine._id, updatedPiscine));
+    setShowModal(false);
   };
 
   const handlePrintPDF = () => {
@@ -42,69 +38,68 @@ const DevisCard = ({ piscine, index,devis}) => {
     });
   };
 
- 
-
   return (
-    <div>
-      <Card style={{ marginTop: '2em' }}>
-        <div id={`devis-card-${piscine._id}`}>
-          <Card.Header>Devis n° {formatDevisNumber(piscine.createdAt)}-000{index + 1}</Card.Header>
-          <Card.Body>
-            <Card.Text><strong>Forme :</strong> {piscine.forme}</Card.Text>
-            <Card.Text>
-              {piscine.forme === "Ronde" ? (
-                <>
-                  <strong>Diamètre :</strong> {piscine.diametre} m
-                </>
-              ) : (
-                <>
-                  <strong>Dimensions :</strong> {piscine.longueur} m x {piscine.largeur} m
-                </>
-              )}
-            </Card.Text>
-            <Card.Text><strong>Profondeur :</strong> {piscine.profondeur} m</Card.Text>
-            <Card.Text><strong>Système :</strong> {piscine.systeme}</Card.Text>
-            <Card.Text><strong>Couleur de revêtement :</strong> {piscine.couleur}</Card.Text>
-            <Card.Text><strong>Type de margelle :</strong> {piscine.margelle}</Card.Text>
-            <Card.Text><strong>Type de filtration :</strong> {piscine.filtration}</Card.Text>
-            <Card.Text><strong>Local technique :</strong> {piscine.local}</Card.Text>
-            <Card.Text><strong>Type de couverture :</strong> {piscine.couverture}</Card.Text>
-            <Card.Text><strong>Type d'éclairage :</strong> {piscine.eclairage}</Card.Text>
-            <hr />
-            <p><strong>Prix estimé :</strong> {Number(devis).toFixed(2)} DT</p>
-          </Card.Body>
-        </div>
-  
-        {/* Boutons en dehors de la zone à capturer */}
+    <Card style={{ marginTop: '2em' }}>
+      <div>
+          <div id={`devis-card-${piscine._id}`}>
+        <Card.Header>
+          Devis n° {formatDevisNumber(piscine.createdAt)}-000{index + 1}
+        </Card.Header>
         <Card.Body>
-          <div className="d-flex justify-content-center">
-            <Button className="buttonsecondaryedit" variant="primary" onClick={() => setShowModal(true)}>
-              Modifier
-            </Button>
-            <Button className="buttonsecondarydel" variant="danger" onClick={()=>{setSupprimer(true)}} style={{ marginLeft: '1em' }}>
-              Supprimer
-            </Button>
-            <Button className="buttonsecondaryimp" variant="secondary" onClick={handlePrintPDF} style={{ marginLeft: '1em' }}>
-              Imprimer en PDF
-            </Button>
+          <div className="row align-items-start">
+            <div className="col-md-8">
+              <Card.Text><strong>Forme :</strong> {piscine.forme}</Card.Text>
+              <Card.Text>
+                {piscine.forme === "Ronde" ? (
+                  <> <strong>Diamètre :</strong> {piscine.diametre} m </>
+                ) : (
+                  <> <strong>Dimensions :</strong> {piscine.longueur} m x {piscine.largeur} m </>
+                )}
+              </Card.Text>
+              <Card.Text><strong>Profondeur :</strong> {piscine.profondeur} m</Card.Text>
+              <Card.Text><strong>Système :</strong> {piscine.systeme}</Card.Text>
+              <Card.Text><strong>Couleur :</strong> {piscine.couleur}</Card.Text>
+              <Card.Text><strong>Margelle :</strong> {piscine.margelle}</Card.Text>
+              <Card.Text><strong>Filtration :</strong> {piscine.filtration}</Card.Text>
+              <Card.Text><strong>Local :</strong> {piscine.local}</Card.Text>
+              <Card.Text><strong>Couverture :</strong> {piscine.couverture}</Card.Text>
+              <Card.Text><strong>Éclairage :</strong> {piscine.eclairage}</Card.Text>
+              <hr />
+              <p><strong>Prix estimé :</strong> {Number(devis).toFixed(2)} DT</p>
+            </div>
+            <div className="col-md-4">
+              <Card.Img
+                variant="top"
+                src={`/Images/choix_piscine/${piscine.nomImage}`}
+                alt="Vue piscine"
+                style={{ width: '100%', height: 'auto', borderRadius: '0.5rem' }}
+              />
+            </div>
           </div>
         </Card.Body>
-      </Card>
-  
+        </div>
+        <Card.Body>
+          <div className="d-flex justify-content-center">
+            <Button className="buttonsecondaryedit" onClick={() => setShowModal(true)}>Modifier</Button>
+            <Button className="buttonsecondarydel" variant="danger" onClick={() => setSupprimer(true)} style={{ marginLeft: '1em' }}>Supprimer</Button>
+            <Button className="buttonsecondaryimp" variant="secondary" onClick={handlePrintPDF} style={{ marginLeft: '1em' }}>Imprimer en PDF</Button>
+          </div>
+        </Card.Body>
+      </div>
+
       <EditPiscine
         devis={piscine}
         handleSave={handleSave}
         show={showModal}
         handleClose={() => setShowModal(false)}
       />
-       <ToSupprimerDevis
-  show={supprimer}
-  handleClose={() => setSupprimer(false)}
-  piscine={piscine}
-/>
-    </div>
-    
+      <ToSupprimerDevis
+        show={supprimer}
+        handleClose={() => setSupprimer(false)}
+        piscine={piscine}
+      />
+    </Card>
   );
-}
-export default DevisCard;
+};
 
+export default DevisCard;

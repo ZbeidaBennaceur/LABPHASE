@@ -17,7 +17,11 @@ const foundUser = await User.findById(decode.id);
 if (!foundUser) {
     return res.status(400).json({errors:[{msg:"Email ou mot de passe incorrect" }]})
 }
-req.user=foundUser;
+req.user = {
+  id: foundUser._id,
+  name: foundUser.name,
+  email: foundUser.email
+};
 next()
 
 

@@ -5,6 +5,7 @@ import DevisCard from '../components/DevisCard'
 import { calculerPrixPiscine } from '../utils/calculDevis';
 
 const MesDevis = () => {
+
   const dispatch = useDispatch()
 
   const myPiscines = useSelector(state => state.piscineReducer.myPiscines)
@@ -13,7 +14,7 @@ const MesDevis = () => {
   useEffect(() => {
     dispatch(getMyPiscines())
   }, [dispatch])
-
+ // console.log(" Rendering MesDevis avec :", myPiscines);
   return (
     <div style={{ padding: '30px' }}>
       <h2 className="text-center mb-4">Mes Devis</h2>

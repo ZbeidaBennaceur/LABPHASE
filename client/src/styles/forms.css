@@ -8,6 +8,9 @@
   justify-content: center;
   align-items: center;
 }
+.modal-body {
+  max-height: none !important;
+}
 
 .Formulaire{
     width: 95%;
@@ -21,3 +24,5 @@
     justify-content: center;
   align-items: center;
 }
+
+
