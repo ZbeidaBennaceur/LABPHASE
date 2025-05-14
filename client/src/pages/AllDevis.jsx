@@ -8,8 +8,8 @@ import { getAllpiscines } from '../JS/actions/piscineAction';
 const AllDevis = () => {
   const dispatch = useDispatch()
 
-  const allPiscine = useSelector(state => state.piscineReducer.Allpiscines)
-  const loading = useSelector(state => state.piscineReducer.loadP)
+  const allPiscine = useSelector(state => state.piscine.Allpiscines)
+  const loading = useSelector(state => state.piscine.loadP)
 
   useEffect(() => {
     dispatch(getAllpiscines())

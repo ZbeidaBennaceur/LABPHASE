@@ -8,8 +8,8 @@ const MesDevis = () => {
 
   const dispatch = useDispatch()
 
-  const myPiscines = useSelector(state => state.piscineReducer.myPiscines)
-  const loading = useSelector(state => state.piscineReducer.loadP)
+  const myPiscines = useSelector(state => state.piscine.myPiscines)
+  const loading = useSelector(state => state.piscine.loadP)
 
   useEffect(() => {
     dispatch(getMyPiscines())

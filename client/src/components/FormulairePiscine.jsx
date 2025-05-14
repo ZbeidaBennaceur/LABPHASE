@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/simulateur.css';
 import { calculerPrixPiscine } from '../utils/calculDevis';
+import { genererNomImage, genererColRvt, genererNomFormeCouleur, genererNomForme, genererNomSysteme, genererNomFiltration,genererNomLocal,genererMargRvt } from '../utils/normaliserNomImage';
 import { Form } from 'react-bootstrap';
 
 const FormulairePiscine = ({ onSubmit }) => {
@@ -20,47 +21,6 @@ const FormulairePiscine = ({ onSubmit }) => {
   const [couverture, setCouverture] = useState('Pas de couverture');
   const [eclairage, setEclairage] = useState("Pas d'éclairage");
 
-  const normaliserNom = (texte) => {
-    const map = {
-      "Bleu clair": "bleuclair",
-      "Bleu lagune": "bleufonce",
-      "Gris clair": "gris",
-      "Grès": "gres",
-      "Marbre": "marbre",
-      "Ovale": "ovale",
-      "Pierre": "pierre"
-    };
-    const clean = map[texte] || texte;
-
-    return clean
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s+/g, "");
-  };
-
-  const genererNomImage = (forme, margelle, couleur) => {
-    const f = normaliserNom(forme);
-    const m = normaliserNom(margelle);
-    const c = normaliserNom(couleur);
-    return `${f}_${m}_${c}.png`;
-  };
-
-  const genererNomForme = (forme) => { return `${normaliserNom(forme)}.png` };
-
-  const genererNomFormeCouleur = (forme, couleur) => {
-    const f = normaliserNom(forme);
-    const c = normaliserNom(couleur);
-    return `${f}_${c}.png`;
-  };
-
-  const genererColRvt = (couleur) => { return `${normaliserNom(couleur)}.png` };
-
-
-
-
-
-
 
   const handleKeyDown = (e) => {
     e.preventDefault();
@@ -70,6 +30,7 @@ const FormulairePiscine = ({ onSubmit }) => {
     console.log("handleSubmit déclenché");
     e.preventDefault();
 
+    
 
     const data = {
       forme,
@@ -102,15 +63,19 @@ const FormulairePiscine = ({ onSubmit }) => {
     onSubmit(data);
   };
 
+useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [etape]);
+
+
   const renderEtape = () => {
 
     switch (etape) {
       case 1:
         return (
           <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4">
-
+            <div className="form-container-etape d-flex">
+              <div className="form-col">
                 <Form.Group>
                   <Form.Label><strong>Forme :</strong></Form.Label>
                   <Form.Select className="formlabel" value={forme} onChange={e => setForme(e.target.value)}>
@@ -120,11 +85,11 @@ const FormulairePiscine = ({ onSubmit }) => {
                   </Form.Select>
                 </Form.Group>
               </div>
-              <div className="w-50 text-center">
+              <div className="image-col text-center">
                 <img
                   src={`/Images/choix_piscine/forme/${genererNomForme(forme)}`}
                   alt={`Piscine ${forme}`}
-                  style={{ width: "90%", borderRadius: "0.5rem" }}
+                  className="image-forme"
                 />
               </div>
             </div>
@@ -133,8 +98,8 @@ const FormulairePiscine = ({ onSubmit }) => {
       case 2:
         return (
           <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4">
+            <div className="form-container-etape d-flex">
+              <div className="form-col">
 
                 {forme === "Ronde" ? (
                   <Form.Group>
@@ -150,8 +115,10 @@ const FormulairePiscine = ({ onSubmit }) => {
                       onKeyDown={handleKeyDown}
                     />
                   </Form.Group>
+          
                 ) : (
                   <>
+
                     <Form.Group>
                       <Form.Label><strong>Longueur :</strong></Form.Label>
                       <Form.Control
@@ -194,7 +161,7 @@ const FormulairePiscine = ({ onSubmit }) => {
                   />
                 </Form.Group>
               </div>
-              <div className="w-50 text-center">
+              <div className="image-col text-center">
                 <img
                   src={`/Images/choix_piscine/forme/${genererNomForme(forme)}`}
                   alt={`Piscine ${forme}`}
@@ -202,48 +169,53 @@ const FormulairePiscine = ({ onSubmit }) => {
                 />
               </div>
             </div>
+            
           </>
+          
         );
       case 3:
         return (
 
           <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4" >
+            <div className="form-container-etape d-flex">
+              <div className="form-col">
                 <Form.Group>
-                  <Form.Label><strong>Couleur :</strong></Form.Label>
+                  <Form.Label><strong>Couleur du revêtement :</strong></Form.Label>
                   <Form.Select className="formlabel" value={couleur} onChange={e => setCouleur(e.target.value)}>
                     <option>Bleu clair</option>
                     <option>Bleu lagune</option>
                     <option>Gris clair</option>
                     <option>Blanc</option>
                   </Form.Select>
-                  <div style={{ marginTop: "2rem" }} >
-                    <h6 style={{ textAlign: "center" }}>Texture du fond de la piscine:</h6>
-                    <img className="d-block mx-auto zoomImg"
+
+                  <div className="texture-preview">
+                    <h6 className="texture-title">Texture du fond de la piscine :</h6>
+                    <img
+                      className="zoomImg text-center"
                       src={`/Images/choix_piscine/revetement_fond/${genererColRvt(couleur)}`}
                       alt={`Piscine ${couleur}`}
-                      style={{ width: "35%", borderRadius: "0.5rem", marginTop: "1.8rem" }}
                     />
                   </div>
                 </Form.Group>
               </div>
-              <div className="w-50 text-center">
+
+              <div className="image-col text-center">
                 <img
+                  className="image-forme"
                   src={`/Images/choix_piscine/couleur/${genererNomFormeCouleur(forme, couleur)}`}
                   alt={`Piscine ${forme} ${couleur}`}
-                  style={{ width: "90%", borderRadius: "0.5rem" }}
                 />
-
               </div>
             </div>
           </>
         );
-      case 4:
+
+         case 4:
         return (
+
           <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4">
+            <div className="form-container-etape d-flex">
+              <div className="form-col">
                 <Form.Group>
                   <Form.Label><strong>Type de margelle :</strong></Form.Label>
                   <Form.Select className="formlabel" value={margelle} onChange={e => setMargelle(e.target.value)}>
@@ -252,12 +224,22 @@ const FormulairePiscine = ({ onSubmit }) => {
                     <option>Grès</option>
                   </Form.Select>
                 </Form.Group>
+                <div className="texture-preview">
+                    <h6 className="texture-title">Texture de la margelle :</h6>
+                    <img
+                      className="zoomImg text-center"
+                      src={`/Images/choix_piscine/revetement_margelle/${genererMargRvt(margelle)}`}
+                      alt={`Margelle en ${margelle}`}
+                    />
+                  </div>
               </div>
-              <div className="w-50 text-center">
+
+
+              <div className="image-col text-center">
                 <img
-                  src={`/Images/choix_piscine/${genererNomImage(forme, margelle, couleur)}`}
-                  alt={`Piscine ${forme} ${margelle} ${couleur}`}
-                  style={{ width: "90%", borderRadius: "0.5rem" }}
+                  className="image-forme"
+                  src={`/Images/choix_piscine/${genererNomImage(forme,margelle, couleur)}`}
+                  alt={`Piscine ${forme} ${couleur}, margelle en ${margelle}`}
                 />
               </div>
             </div>
@@ -265,104 +247,183 @@ const FormulairePiscine = ({ onSubmit }) => {
         );
       case 5:
         return (
-
-          <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4">
+   <>
+   <div className="image-forme-recap-container">
+    <h6 className="image-recap-text">Votre piscine</h6>
+     <img
+                  className="image-forme-recap"
+                  src={`/Images/choix_piscine/${genererNomImage(forme,margelle, couleur)}`}
+                  alt={`Piscine ${forme} ${couleur}, margelle en ${margelle}`}
+                />
+   </div>
+     <div className="form-container-etape d-flex" style={{marginBottom:"2rem"}}>
+              <div className="form-col">
                 <Form.Group>
                   <Form.Label><strong>Système de filtration :</strong></Form.Label>
-                  <Form.Text>Le système de filtration est un élément essentiel de toute piscine, car il permet de maintenir une eau claire, propre et saine en éliminant les impuretés.</Form.Text>
-                  <Form.Select style={{ marginTop: "1rem" }} className="formlabel" value={systeme} onChange={e => setSysteme(e.target.value)}>
+                  <Form.Select className="formlabel" value={systeme} onChange={e => setSysteme(e.target.value)}>
                     <option>A skimmer</option>
                     <option>A débordement</option>
                   </Form.Select>
-                  <>
-                    {systeme === "A skimmer" ? (<Form.Text><strong>Le système à skimmer </strong>utilise des ouvertures sur les parois pour aspirer l’eau en surface. C’est le plus courant dans les piscines privées, simple à installer et économique.</Form.Text>
+                   <>
+                      {systeme === "A skimmer" ? (<Form.Text><strong>Le système à skimmer </strong>utilise des ouvertures sur les parois pour aspirer l’eau en surface. C’est le plus courant dans les piscines privées, simple à installer et économique.</Form.Text>
 
-                    ) : (<Form.Text><strong>Le système à débordement</strong> fait circuler l’eau en la faisant déborder sur les bords. Il assure une filtration plus homogène et une ligne d’eau parfaitement plate, idéale pour les piscines haut de gamme.</Form.Text>)}
-                  </>
+                      ) : (<Form.Text><strong>Le système à débordement</strong> fait circuler l’eau en la faisant déborder sur les bords. Il assure une filtration plus homogène et une ligne d’eau parfaitement plate, idéale pour les piscines haut de gamme.</Form.Text>)}
+                    </>
+
                 </Form.Group>
+              </div>
+              <div className="image-col text-center">
+                <img className="image-forme"
+                  src={`/Images/choix_piscine/systeme/${genererNomSysteme(systeme)}`}
+                  alt={`Piscine à ${systeme}`}
+                />
+              </div>
+            </div>
 
+  <div className="form-container-etape d-flex" style={{marginBottom:"2rem"}}>
+              <div className="form-col">
                 <Form.Group>
-                  <Form.Label style={{ marginTop: "2rem" }}><strong>Type de filtration :</strong></Form.Label>
+                  <Form.Label><strong>Type de filtration :</strong></Form.Label>
                   <Form.Select className="formlabel" value={filtration} onChange={e => setFiltration(e.target.value)}>
                     <option>Filtre à sable</option>
                     <option>Filtre à cartouche</option>
                   </Form.Select>
-                   <>
-                    {filtration === "Filtre à sable" ? (<Form.Text><strong>Le filtre à sable </strong>est le plus utilisé : l’eau traverse un lit de sable qui retient les impuretés. Il est robuste, économique et facile à entretenir.</Form.Text>
+                  <>
+                      {filtration === "Filtre à sable" ? (<Form.Text><strong>Le filtre à sable </strong>est le plus utilisé : l’eau traverse un lit de sable qui retient les impuretés. Il est robuste, économique et facile à entretenir.</Form.Text>
 
-                    ) : (<Form.Text><strong>Le filtre à cartouche</strong> offre une finesse de filtration supérieure. Compact et simple à installer, il nécessite un nettoyage plus régulier.
-    </Form.Text>)}
-                  </>
+                      ) : (<Form.Text><strong>Le filtre à cartouche</strong> offre une finesse de filtration supérieure. Compact et simple à installer, il nécessite un nettoyage plus régulier.
+                      </Form.Text>)}
+                    </>
+
                 </Form.Group>
-
+              </div>
+              <div className="image-col text-center">
+                <img className="image-forme"
+                  src={`/Images/choix_piscine/filtration/${genererNomFiltration(filtration)}`}
+                  alt={`Filtre à ${filtration}`}
+                />
+              </div>
+            </div>
+ <div className="form-container-etape d-flex" style={{marginBottom:"2rem"}}>
+              <div >
                 <Form.Group>
-                  <Form.Label style={{ marginTop: "2rem" }}><strong>Type de traitement :</strong></Form.Label>
+                  <Form.Label><strong>Type de traitement :</strong></Form.Label>
                   <Form.Select className="formlabel" value={traitement} onChange={e => setTraitement(e.target.value)}>
-                    <option>Chlore</option>
+                   <option>Chlore</option>
                     <option>Brome</option>
                     <option>Sel</option>
                   </Form.Select>
                   <>
-                   {traitement==="Chlore"?(
-                  <Form.Text><strong>Le chlore</strong> est efficace et économique, c'est le traitement le plus utilisé, bien qu'il puisse être irritant pour la peau et les yeux.</Form.Text>  
-                  
-                   ):traitement==="Brome"?(
-                    <Form.Text><strong>Le brome</strong> est plus doux et sans odeur, idéal pour les peaux sensibles, mais un peu plus coûteux.</Form.Text>
-                   ):(
-<Form.Text> <strong>Le traitement au sel</strong> utilise un électrolyseur pour produire un chlore naturel. Confortable, mais nécessite un équipement spécifique. Il est moins cher que le Brome et plus cher que le Chlore.
-  </Form.Text>
-                  )}
+                    {traitement === "Chlore" ? (
+                      <Form.Text><strong>Le chlore</strong> est efficace et économique, c'est le traitement le plus utilisé, bien qu'il puisse être irritant pour la peau et les yeux.</Form.Text>
+
+                    ) : traitement === "Brome" ? (
+                      <Form.Text><strong>Le brome</strong> est plus doux et sans odeur, idéal pour les peaux sensibles, mais un peu plus coûteux.</Form.Text>
+                    ) : (
+                      <Form.Text> <strong>Le traitement au sel</strong> utilise un électrolyseur pour produire un chlore naturel. Confortable, mais nécessite un équipement spécifique. Il est moins cher que le Brome et plus cher que le Chlore.
+                      </Form.Text>
+                    )}
                   </>
                 </Form.Group>
               </div>
-              <div className="w-50 text-center">
-                <img
-                  src={`/Images/choix_piscine/${genererNomImage(forme, margelle, couleur)}`}
-                  alt={`Piscine ${forme} ${margelle} ${couleur}`}
-                  style={{ width: "90%", borderRadius: "0.5rem" }}
-                />
-              </div>
+              
             </div>
+           
           </>
 
         );
       case 6:
         return (
           <>
-            <div className="d-flex" style={{ height: "100%", width: "100%" }}>
-              <div className="w-50 pe-4">
+          <div className="image-forme-recap-container">
+    <h6 className="image-recap-text">Votre piscine</h6>
+     <img
+                  className="image-forme-recap"
+                  src={`/Images/choix_piscine/${genererNomImage(forme,margelle, couleur)}`}
+                  alt={`Piscine ${forme} ${couleur}, margelle en ${margelle}`}
+                />
+   </div>
+            <div className="form-container-etape d-flex">
+              <div className="form-col">
                 <Form.Group>
                   <Form.Label><strong>Local technique :</strong></Form.Label>
                   <Form.Select className="formlabel" value={local} onChange={e => setLocal(e.target.value)}>
                     <option>Enterré</option>
                     <option>Hors-sol</option>
                   </Form.Select>
+                  {local === "Hors-sol" ? (
+                      <Form.Text>Le local <strong> hors-sol </strong>est installé à côté de la piscine, en surface. Moins cher que le local enterré,
+il est également facile d’accès et rapide à installer. Il peut toutefois être visible et occuper de la place au sol, mais facilement intégré au reste de votre jardin.
+<br/><strong>Encombrement : </strong>nécessite un espace libre autour du bassin (au moins 1 m²).</Form.Text>
+
+                    ) :(
+                      <Form.Text>Le local <strong> enterré  </strong>est dissimulé dans le sol, souvent sous une trappe.
+Esthétique et mieux protégé, il demande des travaux plus lourds et peut être moins accessible pour l’entretien.
+<br/><strong>Encombrement : </strong>faible en surface, mais nécessite un terrassement d’environ 1 m³.</Form.Text>)
+
+                  }
                 </Form.Group>
               </div>
-              <div className="w-50 text-center">
-                <img
-                  src={`/Images/choix_piscine/${genererNomImage(forme, margelle, couleur)}`}
-                  alt={`Piscine ${forme} ${margelle} ${couleur}`}
-                  style={{ width: "90%", borderRadius: "0.5rem" }}
+              <div className="image-col text-center">
+                <img className="image-forme"
+                  src={`/Images/choix_piscine/local/${genererNomLocal(local)}`}
+                  alt={`Local ${local}`}
                 />
               </div>
-            </div>
+              </div>
           </>
 
         );
       case 7:
         return (
-          <Form.Group>
-            <Form.Label><strong>Type de couverture :</strong></Form.Label>
-            <Form.Select className="formlabel" value={couverture} onChange={e => setCouverture(e.target.value)}>
-              <option>Pas de couverture</option>
-              <option>bâche</option>
-              <option>Volet manuel</option>
-              <option>Volet motorisé</option>
-            </Form.Select>
-          </Form.Group>
+         <>
+  <div className="image-forme-recap-container">
+    <h6 className="image-recap-text">Votre piscine</h6>
+    <img
+      className="image-forme-recap"
+      src={`/Images/choix_piscine/${genererNomImage(forme, margelle, couleur)}`}
+      alt={`Piscine ${forme} ${couleur}, margelle en ${margelle}`}
+    />
+  </div>
+
+  <Form.Group className="form-container-etape">
+    <Form.Label><strong>Type de couverture :</strong></Form.Label>
+    {forme === "Ronde" ? (
+      <Form.Select className="formlabel" value={couverture} onChange={e => setCouverture(e.target.value)}>
+        <option>Pas de couverture</option>
+        <option>Bâche</option>
+      </Form.Select>
+    ) : (
+      <Form.Select className="formlabel" value={couverture} onChange={e => setCouverture(e.target.value)}>
+        <option>Pas de couverture</option>
+        <option>Bâche</option>
+        <option>Volet manuel</option>
+        <option>Volet motorisé</option>
+      </Form.Select>
+    )}
+  </Form.Group>
+
+
+  <div style={{ marginTop: '10px' }}>
+    {couverture === "Bâche" && (
+      <Form.Text>
+        La <strong>bâche de sécurité</strong> est une couverture souple fixée à l’aide de sangles ou de pitons tout autour de la piscine. Elle répond aux normes de sécurité en empêchant l’accès accidentel au bassin, notamment pour les enfants ou les animaux. Elle protège également l’eau des feuilles et saletés, mais demande un peu plus de temps et d’effort pour l’installation. Elle est idéale pour une utilisation saisonnière ou en hivernage.
+      </Form.Text>
+    )}
+
+    {couverture === "Volet manuel" && (
+      <Form.Text>
+        Le <strong>volet roulant manuel</strong> est une couverture rigide composée de lames en PVC ou en polycarbonate, qui s’enroule à l’aide d’une manivelle. Il assure une bonne sécurité pour empêcher l’accès au bassin, tout en limitant l’évaporation de l’eau et en conservant sa chaleur. C’est une solution pratique et économique, bien qu’elle nécessite une intervention manuelle à chaque utilisation.
+      </Form.Text>
+    )}
+
+    {couverture === "Volet motorisé" && (
+      <Form.Text>
+        Le <strong>volet roulant motorisé</strong> est une version automatisée du volet rigide, actionné par un moteur électrique. Il offre un grand confort d’utilisation grâce à l’ouverture et la fermeture sans effort. Il garantit une sécurité maximale tout en étant discret et esthétique. Plus onéreux, il constitue une solution haut de gamme, durable et valorisante pour la piscine.
+      </Form.Text>
+    )}
+  </div>
+</>
         );
       case 8:
         return (
@@ -382,7 +443,7 @@ const FormulairePiscine = ({ onSubmit }) => {
 
   return (
     <form className="formcontainer" onSubmit={handleSubmit}>
-      <h2>Estimez votre devis</h2>
+      <h2 className="form-title">Estimez votre devis</h2>
 
       {renderEtape()}
 
@@ -403,7 +464,22 @@ const FormulairePiscine = ({ onSubmit }) => {
             type="button"
             className="buttonsecondary"
             style={{ margin: "2rem" }}
-            onClick={() => setEtape(etape + 1)}
+            onClick={(
+
+
+
+              
+            ) => 
+             { if (etape===2 &&
+(
+(forme==="Ronde" && diametre.length === 0) ||
+(forme===!"Ronde" && (largeur.length === 0 || longueur.length === 0)) ||
+profondeur.length === 0
+)           
+){alert("Merci de remplir toutes les dimensions");
+  return;
+}    
+              setEtape(etape + 1)}}
           >
             Suivant
           </button>

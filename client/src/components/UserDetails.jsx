@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom'
 
 function UserDetails({ show, handleClose, user }) {
   const dispatch = useDispatch();
-  const allPiscine = useSelector(state => state.piscineReducer.Allpiscines);
+  const allPiscine = useSelector(state => state.piscine.Allpiscines);
   const navigate=useNavigate();
   
   //console.log(allPiscine)

@@ -9,7 +9,7 @@ const NavBarre = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const isAuth = useSelector(state => state.auth.isAuth);
-  const isAdmin=useSelector(state=>state.auth.user.isAdmin)
+  const isAdmin=useSelector(state=>state.auth.user?.isAdmin)
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');

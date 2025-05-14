@@ -6,7 +6,7 @@ const { LOAD_AUTH, SUCCESS_AUTH, FAIL_AUTH, CURRENT_AUTH, LOGOUT_AUTH, CLEAR_SUC
 //initial state
 const initialState={
     isLoad:false,
-    user:{},
+    user:null,
     errors:[],
     success:[],
     isAuth:false,
@@ -41,12 +41,13 @@ const authReducer=(state=initialState,{type,payload})=>{
             isLoad:false,
             user:payload,
             isAuth:true,
+            
         }
         case LOGOUT_AUTH:
             localStorage.removeItem("token")
         return {
             isLoad:false,
-            user:{},
+            user:null,
             errors:[],
             success:[],
             isAuth:false,

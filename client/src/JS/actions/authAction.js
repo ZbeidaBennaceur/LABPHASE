@@ -44,8 +44,9 @@ export const current=()=>async(dispatch)=>{
                 }
         };
         const result=await axios.get("/api/auth/current",config);
+        console.log("Résultat de /current :", result.data);
         dispatch({type:CURRENT_AUTH,payload:result.data});
-       // console.log("payload current() :", result.data);
+      
         
     } catch (error) {
         dispatch({type:FAIL_AUTH,payload:error.response.data.errors})

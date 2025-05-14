@@ -7,6 +7,7 @@ const DevisModal = ({ devis, showModal, handleClose }) => {
   
   const dispatch = useDispatch();
   const isAuth = useSelector(state => state.auth.isAuth);
+const isAdmin = useSelector(state => state.auth.user?.isAdmin);
 
  const handleSave = () => {
   const data = {
@@ -63,8 +64,9 @@ const DevisModal = ({ devis, showModal, handleClose }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
+      {isAdmin && <p>Vous êtes admin, ce devis ne sera pas enregistré.</p>}
        {!isAuth &&(<p>Si vous souhaitez enregistrer ce devis, veuillez vous <a style={{textDecoration:"none", color:"rgb(136, 221, 216)"}} href='/login'>connecter</a> ou vous <a style={{textDecoration:"none", color:"rgb(136, 221, 216)"}} href='/register'>enregistrer</a>.</p>)}
-        {isAuth && (
+        {(isAuth && !isAdmin) &&(
           <Button className='buttonsecondary' variant="secondary" onClick={handleSave}>
             Sauvegarder
           </Button>

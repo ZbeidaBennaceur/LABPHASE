@@ -9,8 +9,8 @@ const DevisUtilisateur = () => {
   const { userId } = useParams()
   const dispatch = useDispatch()
 
-  const allPiscine = useSelector(state => state.piscineReducer.Allpiscines)
-  const loading = useSelector(state => state.piscineReducer.loadP)
+  const allPiscine = useSelector(state => state.piscine.Allpiscines)
+  const loading = useSelector(state => state.piscine.loadP)
 
   useEffect(() => {
     dispatch(getAllpiscines())

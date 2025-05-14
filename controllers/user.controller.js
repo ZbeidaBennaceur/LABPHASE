@@ -30,3 +30,12 @@ exports.deleteUser=async(req,res)=>{
         res.status(400).json({errors:{msg:"Echec de la suppression"}})
     }
 }
+
+exports.currentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: "Erreur serveur" }] });
+  }
+};

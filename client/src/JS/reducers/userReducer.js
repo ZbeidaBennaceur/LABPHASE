@@ -23,7 +23,7 @@ const userReducer=(state=initialState,{type,payload})=> {
         return{...state,
             isLoad:false,
             usersList:payload, 
-            success:payload.success}
+            success:true}
         case DELETE_USER: 
         const newList=state.usersList.filter((el)=>el._id !== payload);
         return {

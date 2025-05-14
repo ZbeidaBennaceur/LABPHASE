@@ -7,6 +7,7 @@ const { LOAD_USER, GET_ALL_USERS, FAIL_USER, DELETE_USER} = require("../actionTy
 
 
 export const getUsers=()=>async(dispatch)=>{
+    
     dispatch({type:LOAD_USER})
     try {
         const config={
@@ -15,8 +16,14 @@ export const getUsers=()=>async(dispatch)=>{
             }
         }
         const result = await axios.get("/api/user/allUsers",config);
+        
+        console.log("Liste reçue :", result.data.listUsers);
+console.log("Type :", typeof result.data.listUsers);
+console.log("Longueur :", result.data.listUsers?.length);
         dispatch({
+
             type:GET_ALL_USERS, payload:result.data.listUsers,
+            
             
         });
         

@@ -19,7 +19,7 @@ const ToastError = ({ errors }) => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          toastId: `${error.msg}-${Date.now()}` // Utilisation de `Date.now()` pour éviter les doublons
+          toastId: `${error.msg}-${Date.now()}`
         })
       );
     }
