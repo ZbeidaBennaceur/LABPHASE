@@ -14,10 +14,9 @@ const connectDB = require ('./config/connectDB')
 const app=express()
 
 //MIDDLEWARE
-app.use(cors({
-origin: 'https://azureapiscines.netlify.app'
-  }));
-app.use(express.json())
+app.use((req,res)=>{
+  res.send("API is running...")
+})
 
 //05 CONNEC DB
 connectDB()
