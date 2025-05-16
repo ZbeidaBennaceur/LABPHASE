@@ -22,6 +22,9 @@ app.use((req,res)=>{
 connectDB()
 
 //06 ROUTES
+
+app.use(express.json())
+
 app.use("/api/auth", require('./routes/auth.route'));
 
 //ROUTE MANIPULATION USERS PAR ADMIN
